@@ -3,7 +3,7 @@ var chai = require('chai');
 var chaihttp = require('chai-http');
 chai.use(chaihttp);
 var expect = chai.expect;
-var Food = require(__dirname + "/../lib/foodModel");
+var Food = require(__dirname + "/../app/lib/foodModel");
 
 process.env.MONGOLAB_URI = "mongodb://localhost/menudb";
 require(__dirname + "/../server");
