@@ -2,18 +2,18 @@ var express = require('express');
 var app = express();
 var mongoose = require('mongoose');
 var fs = require('fs');
-var router = require(__dirname + "/app/lib/foodRouter");
+process.env.APP_SECRET = process.env.APP_SECRET || 'somesortofstringorsomesuch';
 
-// Not yet working
-// 
-// var auth = require(__dirname + "/app/lib/authRouter");
+var router = require(__dirname + "/routes/foodRouter");
+ 
+var auth = require(__dirname + "/routes/authRouter");
 
 mongoose.connect(process.env.MONGOLAB_URI || "mongodb://localhost/menudb");
 
 app.use(express.static('public'));
 
 app.use('/api', router);
-// app.use('/api', auth);
+app.use('/api', auth);
 
 app.get('/:filename', function(req, res, next) {
   fs.stat(__dirname + '/build/' + req.params.filename, function(err, stats) {

@@ -4,9 +4,6 @@ var eat = require('eat');
 
 var userSchema = new mongoose.Schema({
   username: String,
-  email: String,
-  firstname: String,
-  lastname: String,
   auth: {
     basic: {
       username: String,
@@ -20,8 +17,11 @@ userSchema.methods.hashPassword = function(password) {
   return hash;
 };
 
-userSchema.methods.checkPassword = function(password) {
-  return bcrypt.ccompareSync(password, this.auth.basic.password);
+userSchema.methods.checkPassword = function(password, callback) {
+  bcrypt.compare(password, this.auth.basic.password, function(err, match) {
+    if(err) callback(err);
+    callback(null, match);
+  });
 };
 
 userSchema.methods.generateToken = function(callback) {

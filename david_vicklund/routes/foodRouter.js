@@ -1,7 +1,7 @@
 var express = require("express");
-var Food = require('./foodModel');
+var Food = require('../models/foodModel');
 var bodyParser = require('body-parser');
-var handleError = require('./handleError');
+var handleError = require('../lib/handleError');
 var foodRouter = module.exports = exports = express.Router();
 
 foodRouter.get('/food', function(req, res) {
