@@ -3,6 +3,7 @@ var Food = require('../models/foodModel');
 var bodyParser = require('body-parser');
 var handleError = require('../lib/handleError');
 var foodRouter = module.exports = exports = express.Router();
+var basicHttp = require(__dirname + '/../lib/basicHttpAuth');
 
 foodRouter.get('/food', function(req, res) {
   Food.find({}, function(err, data) {

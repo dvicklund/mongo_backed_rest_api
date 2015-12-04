@@ -23,6 +23,7 @@
     "gulp": "^3.9.0",
     "gulp-jshint": "^2.0.0",
     "gulp-mocha": "^2.2.0",
+    "gulp-watch": "^4.3.5",
     "jshint-stylish": "^2.1.0",
     "mocha": "^2.3.4",
     "webpack-stream": "^2.1.1"
