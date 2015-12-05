@@ -10,7 +10,7 @@ var auth = require(__dirname + "/routes/authRouter");
 
 mongoose.connect(process.env.MONGOLAB_URI || "mongodb://localhost/menudb");
 
-app.use(express.static('public'));
+app.use(express.static(__dirname + '/build'));
 
 app.use('/api', router);
 app.use('/api', auth);

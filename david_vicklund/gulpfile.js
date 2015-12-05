@@ -6,7 +6,7 @@ var webpack = require('webpack-stream');
 var fileList = ['lib/*.js', 'public/*.js', 'app/*.js'];
 
 gulp.task('mocha:test', function() {
-  return gulp.src('test/**/*.js')
+  return gulp.src('test/test.js')
   .pipe(mocha({reporter: 'nyan'}));
 });
 
@@ -25,7 +25,7 @@ gulp.task('jshint:test', function() {
 });
 
 gulp.task('webpack:test', function() {
-  return gulp.src('test/client/test_entry')
+  return gulp.src('test/client/test_entry.js')
     .pipe(webpack({
       output: { 
         filename: 'test_bundle.js'
@@ -60,15 +60,27 @@ gulp.task('webpack:app', function() {
 gulp.task('watch:css', function() {
   return gulp.src('app/css/*.css')
     .pipe(watch('css/**/*.css'))
-    .pipe(gulp.dest('build'));
+    .pipe(gulp.dest('build/'));
 });
 
 gulp.task('watch:html', function() {
   return gulp.src(['app/*.html', 'app/html/*.html'])
-    .pipe(watch(''));
+    .pipe(watch('*.html'))
+    .pipe(gulp.dest('build/'));
 });
 
-gulp.task('watch:all', ['watch:css', 'watch:html']);
+gulp.task('watch:js', function() {
+  return gulp.src(['app/js/**/*.js'])
+    .pipe(watch('*.html'))
+    .pipe(webpack({
+      output: {
+        filename: 'bundle.js'
+      }
+    }))
+    .pipe(gulp.dest('build/'));
+});
+
+gulp.task('watch:all', ['watch:css', 'watch:html', 'watch:js']);
 gulp.task('test:dev', ['jshint:test', 'jshint:app', 'mocha:test']);
 gulp.task('build:app', ['webpack:app', 'static:app']);
 gulp.task('default', ['test:dev', 'build:app']);
