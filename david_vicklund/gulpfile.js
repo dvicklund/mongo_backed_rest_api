@@ -2,6 +2,10 @@ var gulp = require('gulp');
 var jshint = require('gulp-jshint');
 var mocha = require('gulp-mocha');
 var watch = require('gulp-watch');
+var sass = require('gulp-sass');
+var minifyCss = require('gulp-minify-css');
+var concatCss = require('gulp-concat-css');
+var sourcemaps = require('gulp-sourcemaps');
 var webpack = require('webpack-stream');
 var fileList = ['lib/*.js', 'public/*.js', 'app/*.js'];
 
@@ -34,6 +38,19 @@ gulp.task('webpack:test', function() {
     .pipe(gulp.dest('test/client/'));
 });
 
+// CSS tasks
+gulp.task('minify:scss', function() {
+  gulp.src('app/scss/*.scss')
+    .pipe(sass())
+    .pipe(gulp.dest('app/css/'));
+  return gulp.src('app/css/**/*.css')
+    .pipe(sourcemaps.init())
+    .pipe(concatCss('styles.min.css'))
+    .pipe(minifyCss())
+    .pipe(sourcemaps.write())
+    .pipe(gulp.dest('build/'));
+});
+
 gulp.task('jshint:app', function() {
   return gulp.src(fileList)
   .pipe(jshint())
@@ -57,21 +74,26 @@ gulp.task('webpack:app', function() {
   .pipe(gulp.dest('build/'));
 });
 
+// Who watches the watch-tasks?
+gulp.task('watch:scss', function() {
+  gulp.watch('app/scss/**/*.scss', ['minify:scss']);
+});
+
 gulp.task('watch:css', function() {
-  return gulp.src('app/css/*.css')
-    .pipe(watch('css/**/*.css'))
+  return gulp.src('app/css/**/*.css')
+    .pipe(watch('app/css/**/*.css'))
     .pipe(gulp.dest('build/'));
 });
 
 gulp.task('watch:html', function() {
   return gulp.src(['app/*.html', 'app/html/*.html'])
-    .pipe(watch('*.html'))
+    .pipe(watch(['app/*.html', 'app/html/*.html']))
     .pipe(gulp.dest('build/'));
 });
 
 gulp.task('watch:js', function() {
   return gulp.src(['app/js/**/*.js'])
-    .pipe(watch('*.html'))
+    .pipe(watch('app/js/**/*.js'))
     .pipe(webpack({
       output: {
         filename: 'bundle.js'
@@ -80,9 +102,9 @@ gulp.task('watch:js', function() {
     .pipe(gulp.dest('build/'));
 });
 
-gulp.task('watch:all', ['watch:css', 'watch:html', 'watch:js']);
+gulp.task('watch:all', ['watch:scss', 'watch:html', 'watch:js']);
 gulp.task('test:dev', ['jshint:test', 'jshint:app', 'mocha:test']);
-gulp.task('build:app', ['webpack:app', 'static:app']);
+gulp.task('build:app', ['webpack:app', 'static:app', 'minify:scss']);
 gulp.task('default', ['test:dev', 'build:app']);
 
 gulp.doneCallback = function(err) {
