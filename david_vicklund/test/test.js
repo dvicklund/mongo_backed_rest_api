@@ -5,7 +5,7 @@ chai.use(chaihttp);
 var expect = chai.expect;
 var Food = require(__dirname + "/../models/foodModel");
 
-process.env.MONGOLAB_URI = "mongodb://localhost/menudb";
+process.env.MONGOLAB_URI = "mongodb://localhost/menudb_test";
 require(__dirname + "/../server");
 
 describe('routes', function() {
@@ -120,3 +120,4 @@ describe('routes', function() {
     });
   });
 });
+
