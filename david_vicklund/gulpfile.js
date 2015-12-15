@@ -40,7 +40,7 @@ gulp.task('webpack:test', function() {
 
 // CSS tasks
 gulp.task('minify:scss', function() {
-  gulp.src('app/scss/*.scss')
+  gulp.src('app/scss/application.scss')
     .pipe(sass())
     .pipe(gulp.dest('app/css/'));
   return gulp.src('app/css/**/*.css')

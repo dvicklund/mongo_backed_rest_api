@@ -7,15 +7,18 @@
 </head>
 <body data-ng-app="FoodApp">
   <h1>Food Metanalysisomerator</h1>
-  <h3>Not sure what metanalysisomeration is?</h3>
-  <p>You're not alone.  Thousands of people around the world don't know about the sheer computational power required to build a metanalysisomerating machine, much less wield one with any hope of survival.</p>
-  <p>Fortunately for you, we here at MEAL-Tec have engineered a purely elegant solution in the form of this very app!  That's right, for the low-low price of absolutely nothing at all, you can have the power of metanalysisomeration in your hands <strong>RIGHT NOW!</strong></p>
+  <section id="intro">
+    <h3>Not sure what metanalysisomeration is?</h3>
+    <p>You're not alone.  Thousands of people around the world don't know about the sheer computational power required to build a metanalysisomerating machine, much less wield one with any hope of survival.</p>
+    <p>Fortunately for you, we here at MEAL-Tec have engineered a purely elegant solution in the form of this very app!  That's right, for the low-low price of absolutely nothing at all, you can have the power of metanalysisomeration in your hands <strong>RIGHT NOW!</strong></p>
+  </section>
+
   <section data-ng-controller="foodController" data-ng-init="readAll()">
     <ul id="errorList">
       <li data-ng-repeat="error in errors">{{error}}</li>
     </ul>
 
-    <form name="newFoodForm" data-ng-submit="create(newFood)">
+    <form class="newForm" name="newFoodForm" data-ng-submit="create(newFood)">
       <label for="newFoodName">Name:</label>
       <input type="text" id="newFoodName" placeholder="Pick your food! If you dare..." required data-ng-model="newFood.name">
       <button type="submit" data-ng-disabled="newFoodForm.$invalid">Dear God What Have I Done...</button>
