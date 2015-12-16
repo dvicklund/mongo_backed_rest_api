@@ -1,0 +1,15 @@
+<form name="{{formName}}" data-ng-submit="save({food: food})">
+  <h4>{{headingText}}</h4>
+
+  <label for="foodName">Name: </label>
+  <input type="text" id="foodName" required data-ng-model="food.name">
+
+  <label for="foodType">Type: </label>
+  <input type="text" id="foodType" data-ng-model="food.foodType" placeholder="edible">
+
+  <label for="foodDesc">Description: </label>
+	<input type="text" id="foodDesc" data-ng-model="food.description" placeholder="descriptive words">
+
+  <button type="submit">{{buttonText}}</button>
+</form>
+<ng-transclude></ng-transclude>

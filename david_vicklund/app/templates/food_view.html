@@ -1,0 +1,30 @@
+<section data-ng-init="readAll()">
+    <ul id="errorList">
+      <li data-ng-repeat="error in errors">{{error}}</li>
+    </ul>
+
+    <section data-food-form-directive
+      data-button-text="Dear God, What Have I Done"
+      data-form-name="newFoodForm"
+      data-heading-text="Make New Food"
+      data-food="newFood"
+      data-save="create(newFood)"
+    ></section>
+
+    <ul data-list-directive data-title="food">
+      <li data-ng-repeat="food in foods">
+        <span data-food-single-directive data-food="food"></span>
+        <section data-food-form-directive
+          data-ng-if="food.editing"
+          data-button-text="Finish Editing"
+          data-form-name="edit{{food._id}}"
+          data-food="food"
+          data-heading-text="Editing {{food.name}}"
+          data-save="update(food)">
+          <button data-ng-click="food.editing = false">Nevermind</button>
+        </section>
+        <button data-ng-if="!food.editing" data-ng-click="edit(food)">Edit</button>
+        <button data-ng-if="!food.editing" data-ng-click="remove(food)">Defenestrate</button>
+      </li>
+    </ul>
+  </section>

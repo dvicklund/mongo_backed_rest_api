@@ -20,7 +20,7 @@ app.get('/:filename', function(req, res, next) {
     if(err) {
       console.log(err);
       return next();
-    }
+    };
 
     if(!stats.isFile()) return next();
 

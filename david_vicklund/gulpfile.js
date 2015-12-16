@@ -86,8 +86,8 @@ gulp.task('watch:css', function() {
 });
 
 gulp.task('watch:html', function() {
-  return gulp.src(['app/*.html', 'app/html/*.html'])
-    .pipe(watch(['app/*.html', 'app/html/*.html']))
+  return gulp.src(['app/**/*.html'])
+    .pipe(watch(['app/**/*.html']))
     .pipe(gulp.dest('build/'));
 });
 

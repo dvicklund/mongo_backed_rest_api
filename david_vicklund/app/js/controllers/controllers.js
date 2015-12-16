@@ -1,3 +1,3 @@
 module.exports = function(app) {
-  require('../food/foodControl')(app);
+  require('../food/controllers/foodControl')(app);
 };

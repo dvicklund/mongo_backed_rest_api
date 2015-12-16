@@ -6,7 +6,7 @@ module.exports = function(app) {
     
     $scope.defaults = {
       name: 'default',
-      type: 'edible',
+      foodType: 'edible',
       quantity: 1,
       unit: 'each',
       cost: 1.00

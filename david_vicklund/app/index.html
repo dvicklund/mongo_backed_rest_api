@@ -13,37 +13,8 @@
     <p>Fortunately for you, we here at MEAL-Tec have engineered a purely elegant solution in the form of this very app!  That's right, for the low-low price of absolutely nothing at all, you can have the power of metanalysisomeration in your hands <strong>RIGHT NOW!</strong></p>
   </section>
 
-  <section data-ng-controller="foodController" data-ng-init="readAll()">
-    <ul id="errorList">
-      <li data-ng-repeat="error in errors">{{error}}</li>
-    </ul>
+  <main data-ng-view></main>
 
-    <form class="newForm" name="newFoodForm" data-ng-submit="create(newFood)">
-      <label for="newFoodName">Name:</label>
-      <input type="text" id="newFoodName" placeholder="Pick your food! If you dare..." required data-ng-model="newFood.name">
-      <button type="submit" data-ng-disabled="newFoodForm.$invalid">Dear God What Have I Done...</button>
-    </form>
-    
-    <ul id='foodList'>
-      <li data-ng-repeat="food in foods">
-        {{food.name}}
-        <form name="foodForm{{food._id}}" data-ng-submit="update(food)" data-ng-if="food.editing">
-          <h4>Edit a Food</h4>
-
-          <label for="foodName{{food._id}}">Name: </label>
-          <input type="text" id="foodName{{food._id}}" required data-ng-model="food.name">
-
-          <label for="foodType{{food._id}}">Type: </label>
-          <input type="text" id="foodType{{food._id}}" data-ng-model="food.type" placeholder="edible">
-
-          <button type="submit">Finish Editing</button>
-          <button data-ng-click="cancel(food)">Nevermind</button>
-        </form>
-        <button data-ng-if="!food.editing" data-ng-click="edit(food)">Edit</button>
-        <button data-ng-if="!food.editing" data-ng-click="remove(food)">Defenestrate</button>
-      </li>
-    </ul>
-  </section>
   <script src="bundle.js"></script>
 </body>
 </html>
