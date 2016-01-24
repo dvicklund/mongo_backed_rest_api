@@ -16,6 +16,6 @@ foodApp.config(['$routeProvider', function($route) {
 		})
 		.otherwise({
 			redirectTo: '/food'
-		})
+		});
 		
 }]);

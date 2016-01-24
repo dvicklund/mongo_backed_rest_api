@@ -25,7 +25,6 @@ authRouter.post('/signup', jsonParser, function(req, res) {
       return res.json({msg: "User already exists!"});
     }
   });
-
 });
 
 authRouter.get('/signin', basicHttp, function(req, res) {
